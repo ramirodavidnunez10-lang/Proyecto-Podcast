@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Proyecto Podcast</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary: #2f6fed;
+  --text: #222;
+  --muted: #666;
+  --bg: #f4f6f8;
+  --white: #ffffff;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+}
+
+/* ===== HEADER ===== */
+
+header {
+  background: var(--white);
+  border-bottom: 1px solid #e5e5e5;
+}
+
+/* fila superior */
+.header-top {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 40px;
+}
+
+.logo-img {
+  position: absolute;
+  left: 40px;
+  width: 45px;
+}
+
+.logo-text {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* ===== NAVBAR ===== */
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 12px;
+}
+
+.menu {
+  display: flex;
+  gap: 28px;
+}
+
+/* items */
+.menu-item {
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+}
+
+.menu-item:hover {
+  color: var(--primary);
+}
+
+/* deshabilitado */
+.disabled {
+  color: var(--muted);
+  pointer-events: none;
+}
+
+/* ===== DROPDOWN ===== */
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 22px;
+  left: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  min-width: 140px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  z-index: 10;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 10px 14px;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.dropdown-content a:hover {
+  background: #f0f0f0;
+}
+
+/* mostrar dropdown */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* ===== CONTENIDO ===== */
+
+.episode {
+  background: white;
+  max-width: 700px;
+  margin: 30px auto;
+  padding: 24px;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.date {
+  color: var(--muted);
+  font-size: 0.85em;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-top">
+    <img src="img/logo.png" alt="Logo Proyecto Podcast" class="logo-img">
+    <div class="logo-text">Proyecto Podcast</div>
+  </div>
+
+  <nav class="navbar">
+    <div class="menu">
+
+      <div class="dropdown">
+        <span class="menu-item">Podcast</span>
+        <div class="dropdown-content">
+          <a href="#" onclick="setIdioma('es')">Español</a>
+          <a href="#" onclick="setIdioma('en')">Inglés</a>
+        </div>
+      </div>
+
+      <span class="menu-item disabled" id="episodios">Episodios</span>
+
+      <div class="dropdown">
+        <span class="menu-item">Contacto</span>
+        <div class="dropdown-content">
+          <a href="#">Sobre mí</a>
+          <a href="#">Contactarme</a>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+</header>
+
+<div class="episode">
+  <h2>Episodio 1 – Introducción</h2>
+  <p class="date">Publicado: 1 de enero de 2025</p>
+  <p>En este episodio hablamos sobre aprendizaje de idiomas y pensamiento profundo.</p>
+</div>
+
+<script>
+function setIdioma(idioma) {
+  const episodios = document.getElementById("episodios");
+  episodios.classList.remove("disabled");
+
+  if (idioma === "es") {
+    episodios.textContent = "Episodios (Español)";
+  } else {
+    episodios.textContent = "Episodes (English)";
+  }
+}
+</script>
+
+</body>
+</html>
+
