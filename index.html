@@ -22,46 +22,66 @@ body {
   margin: 0; font-family: 'Inter', sans-serif;
   background: url('img/fondo.png') no-repeat center center fixed;
   background-size: cover; overflow-x: hidden;
-  transition: background-image 0.8s ease-in-out;
 }
 
-/* HEADER */
+/* HEADER Y NAVEGACIÓN */
 header {
-  background: rgba(27, 27, 27, 0.95); padding: 5px 40px;
+  background: rgba(27, 27, 27, 0.98); padding: 5px 40px;
   display: flex; align-items: center; justify-content: space-between;
   position: fixed; top: 0; left: 0; width: 100%; min-height: 90px;
-  z-index: 1000; box-sizing: border-box; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 2000; box-sizing: border-box; transition: 0.5s;
 }
 .header-hidden { transform: translateY(-100%); }
-.header-left { display: flex; align-items: center; gap: 15px; cursor: pointer; transition: 0.6s; }
+
+.header-left { display: flex; align-items: center; gap: 15px; cursor: pointer; }
 body.platform-mode .header-left { position: absolute; left: 50%; transform: translateX(-50%); }
 
 .logo-img { width: 80px; height: 80px; object-fit: contain; }
-
 .brand { display: flex; flex-direction: column; line-height: 0.8; color: white; font-family: 'Montserrat', sans-serif; }
 .proyecto { font-size: 26px; font-weight: 900; text-transform: uppercase; }
 .podcast-text { font-size: 26px; font-weight: 900; color: var(--arg-blue); text-transform: uppercase; }
+.punto-amarillo { width: 15px; height: 15px; background-color: var(--yellow-muted); border-radius: 50%; display: inline-block; margin-left: 2px; }
 
-.punto-amarillo {
-  width: 15px; height: 15px; background-color: var(--yellow-muted);
-  border-radius: 50%; display: inline-block; margin-left: 2px; transform: translateY(1px); 
-}
-
-.navbar { position: absolute; left: 50%; transform: translateX(-50%); display: flex; gap: 40px; transition: opacity 0.3s; }
+.navbar { position: absolute; left: 50%; transform: translateX(-50%); display: flex; gap: 40px; }
 body.platform-mode .navbar, body.platform-mode .header-right { opacity: 0; pointer-events: none; }
 
 .menu-button { 
   background: none; border: none; font-family: inherit; font-size: 16px; font-weight: 600; 
-  color: white; cursor: pointer; padding: 10px 15px; border-radius: 8px; transition: all 0.3s ease;
+  color: white; cursor: pointer; padding: 10px 15px; border-radius: 8px;
 }
 
-/* REDES SOCIALES ORIGINALES */
-.social-icon { color: white; font-size: 26px; text-decoration: none; transition: all 0.4s ease; display: inline-block; }
-.fa-youtube:hover { color: var(--yt-color); transform: scale(1.2) rotate(5deg); filter: drop-shadow(0 0 8px rgba(255,0,0,0.5)); }
-.fa-instagram:hover { background: var(--ig-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; transform: scale(1.2) rotate(-5deg); filter: drop-shadow(0 0 8px rgba(214, 36, 159, 0.5)); }
+/* DROPDOWNS LÓGICA */
+.dropdown { position: relative; display: inline-block; }
+.dropdown-content {
+  display: none; position: absolute; background: white;
+  min-width: 160px; box-shadow: 0px 8px 16px rgba(0,0,0,0.3); 
+  border-radius: 8px; z-index: 3000; left: 50%; transform: translateX(-50%); top: 100%;
+}
+.dropdown:not(.locked):hover .dropdown-content { display: block; }
+
+/* FOOTER DESPLIEGUE ARRIBA */
+.footer-nav .dropdown-content { top: auto; bottom: 100%; margin-bottom: 15px; }
+
+.dropdown-content a { color: #333; padding: 12px 16px; text-decoration: none; display: block; font-size: 14px; cursor: pointer; }
+.dropdown-content a:hover { background-color: #f1f1f1; color: var(--primary); }
+
+.locked { opacity: 0.3; cursor: not-allowed; }
+
+/* RESPONSIVE CELULAR */
+@media (max-width: 768px) {
+    header { padding: 10px; flex-direction: column; min-height: 130px; }
+    .navbar { position: static; transform: none; gap: 5px; width: 100%; justify-content: center; margin-top: 10px; }
+    .header-right { display: none; }
+    .logo-img { width: 55px; height: 55px; }
+    .proyecto, .podcast-text { font-size: 18px; }
+    main { margin-top: 160px; }
+    .about-main, .info-card, .info-card.reverse { flex-direction: column; padding: 30px; margin: 20px; text-align: center; }
+    .card-img, .about-image-container { width: 100%; max-width: 280px; height: 280px; }
+    #welcome-text { font-size: 45px !important; }
+}
 
 /* CONTENIDO */
-main { margin-top: 130px; min-height: 100vh; padding-bottom: 100px; }
+main { margin-top: 130px; min-height: 100vh; padding-bottom: 120px; }
 .section-container { display: none; }
 .active-section { display: block; }
 
@@ -70,7 +90,7 @@ main { margin-top: 130px; min-height: 100vh; padding-bottom: 100px; }
   padding: 50px; display: flex; gap: 50px; align-items: center; box-shadow: 0 20px 40px rgba(0,0,0,0.15);
   backdrop-filter: blur(15px);
 }
-.info-card { opacity: 0; transform: translateY(60px); transition: all 1s cubic-bezier(0.2, 1, 0.3, 1); }
+.info-card { opacity: 0; transform: translateY(60px); transition: 1s cubic-bezier(0.2, 1, 0.3, 1); }
 .info-card.reveal { opacity: 1; transform: translateY(0); }
 .info-card.reverse { flex-direction: row-reverse; }
 
@@ -78,48 +98,21 @@ main { margin-top: 130px; min-height: 100vh; padding-bottom: 100px; }
 .about-img { width: 100%; height: 100%; border-radius: 20px; object-fit: cover; position: absolute; top:0; left:0; opacity: 0; transition: 1.2s; }
 .about-img.active { opacity: 1; }
 
-.card-text p, #about-desc { font-size: 18px; line-height: 1.8; color: #444; font-weight: 400; text-align: justify; }
-.card-text h2, #about-title { font-size: 34px; margin-bottom: 20px; color: var(--text); font-family: 'Montserrat', sans-serif; font-weight: 800; }
+.card-text p, #about-desc { font-size: 18px; line-height: 1.8; color: #444; text-align: justify; }
+.card-text h2, #about-title { font-size: 34px; margin-bottom: 20px; font-family: 'Montserrat', sans-serif; font-weight: 800; }
 
-/* BIENVENIDAS */
-.welcome-container { height: 90px; overflow: hidden; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; }
-#welcome-text { font-size: 65px; font-family: 'Montserrat', sans-serif; font-weight: 900; text-shadow: 2px 4px 10px rgba(0,0,0,0.1); transition: all 0.6s; }
-.slide-fade-out { opacity: 0; transform: translateY(-30px); filter: blur(8px); }
-.slide-fade-in { opacity: 0; transform: translateY(30px); filter: blur(8px); }
+/* REDES SOCIALES HOVER EFECTOS */
+.social-icon { color: white; font-size: 26px; text-decoration: none; transition: 0.4s; display: inline-block; }
+.fa-youtube:hover { color: var(--yt-color); transform: scale(1.2) rotate(5deg); }
+.fa-instagram:hover { background: var(--ig-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; transform: scale(1.2) rotate(-5deg); }
 
 /* FOOTER */
 .footer-nav {
     position: fixed; bottom: -120px; left: 0; width: 100%; background: rgba(27, 27, 27, 0.98);
     padding: 15px 40px; display: flex; justify-content: space-between; align-items: center;
-    box-sizing: border-box; z-index: 1000; transition: transform 0.5s ease; border-top: 3px solid var(--primary);
+    box-sizing: border-box; z-index: 2500; transition: 0.5s; border-top: 3px solid var(--primary);
 }
 .footer-visible { transform: translateY(-120px); }
-
-/* --- REGLAS EXCLUSIVAS PARA CELULARES --- */
-@media (max-width: 768px) {
-    header { padding: 10px; min-height: auto; flex-direction: column; gap: 10px; }
-    .logo-img { width: 60px; height: 60px; }
-    .proyecto, .podcast-text { font-size: 20px; }
-    .navbar { position: static; transform: none; gap: 10px; width: 100%; justify-content: center; overflow-x: auto; padding: 5px; }
-    .header-right { display: none; } /* Se ocultan arriba para no amontonar */
-    
-    main { margin-top: 180px; }
-    .about-main, .info-card, .info-card.reverse { flex-direction: column; padding: 25px; margin: 20px; text-align: center; }
-    .card-img, .about-image-container { width: 100%; max-width: 280px; height: 280px; }
-    #welcome-text { font-size: 40px; }
-    .footer-nav { padding: 10px 20px; }
-}
-
-/* DROPDOWNS */
-.dropdown { position: relative; display: inline-block; }
-.dropdown-content {
-  display: none; position: absolute; background-color: rgba(255, 255, 255, 0.98);
-  min-width: 160px; box-shadow: 0px 8px 16px rgba(0,0,0,0.2); border-radius: 8px; z-index: 1100; left: 50%; transform: translateX(-50%); overflow: hidden;
-}
-.dropdown:not(.locked):hover .dropdown-content { display: block; }
-.dropdown-content a { color: #333; padding: 12px 16px; text-decoration: none; display: block; font-size: 14px; cursor: pointer; }
-.dropdown-content a:hover { background-color: #f1f1f1; color: var(--primary); }
-.locked { opacity: 0.3; cursor: not-allowed; }
 </style>
 </head>
 <body id="main-body">
@@ -143,7 +136,7 @@ main { margin-top: 130px; min-height: 100vh; padding-bottom: 100px; }
         <a onclick="seleccionarIdioma('Inglés')">Inglés</a>
       </div>
     </div>
-    <div id="container-nivel-top" class="dropdown locked">
+    <div class="dropdown locked btn-nivel">
       <button class="menu-button" style="color: var(--yellow-muted)">Nivel</button>
       <div class="dropdown-content">
         <a onclick="irANivel('A1')">A1</a><a onclick="irANivel('A2')">A2</a><a onclick="irANivel('B1')">B1</a><a onclick="irANivel('B2')">B2</a><a onclick="irANivel('C1')">C1</a>
@@ -165,7 +158,9 @@ main { margin-top: 130px; min-height: 100vh; padding-bottom: 100px; }
 
 <main>
     <div id="sec-inicio" class="section-container active-section">
-        <div class="welcome-container"><div id="welcome-text">Bienvenidos</div></div>
+        <div style="height:90px; display:flex; justify-content:center; align-items:center; margin-bottom:20px;">
+            <div id="welcome-text" style="font-size:65px; font-family:'Montserrat'; font-weight:900;">Bienvenidos</div>
+        </div>
         <section class="about-main">
             <div style="flex:1;">
                 <h2 id="about-title" onclick="mostrarSeccion('sobre-mi-extendido')" style="cursor:pointer;">Sobre mí</h2>
@@ -199,46 +194,43 @@ main { margin-top: 130px; min-height: 100vh; padding-bottom: 100px; }
     </div>
 
     <div id="sec-contacto" class="section-container">
-        <div class="about-main" style="max-width:600px; flex-direction:column;">
+        <div class="about-main" style="max-width:600px; flex-direction:column; margin:auto;">
             <h2 style="font-family:'Montserrat';">Contáctame</h2>
             <form action="https://formsubmit.co/ramiro.nunez@mi.unc.edu.ar" method="POST" style="width:100%;">
-                <input type="text" name="name" placeholder="Tu nombre" required style="width:100%; padding:15px; margin:8px 0; border-radius:10px; border:1px solid #ddd; font-family: inherit;">
-                <input type="email" name="email" placeholder="Tu correo electrónico" required style="width:100%; padding:15px; margin:8px 0; border-radius:10px; border:1px solid #ddd; font-family: inherit;">
-                <textarea name="message" rows="5" placeholder="¿En qué puedo ayudarte?" required style="width:100%; padding:15px; margin:8px 0; border-radius:10px; border:1px solid #ddd; font-family: inherit;"></textarea>
-                <button type="submit" style="background:var(--primary); color:white; border:none; padding:15px; border-radius:12px; cursor:pointer; font-weight:800; width:100%; font-family:'Montserrat';">ENVIAR</button>
+                <input type="text" name="name" placeholder="Tu nombre" required style="width:100%; padding:15px; margin:8px 0; border-radius:10px; border:1px solid #ddd;">
+                <input type="email" name="email" placeholder="Tu correo electrónico" required style="width:100%; padding:15px; margin:8px 0; border-radius:10px; border:1px solid #ddd;">
+                <textarea name="message" rows="5" placeholder="¿En qué puedo ayudarte?" required style="width:100%; padding:15px; margin:8px 0; border-radius:10px; border:1px solid #ddd;"></textarea>
+                <button type="submit" style="background:var(--primary); color:white; border:none; padding:15px; border-radius:12px; cursor:pointer; font-weight:800; width:100%;">ENVIAR</button>
             </form>
         </div>
     </div>
 
     <div id="sec-episodios" class="section-container">
-        <div class="podcast-grid-section">
-            <h2 id="titulo-nivel" style="color:white; text-shadow: 2px 4px 10px black; font-size: 45px; text-align:center; font-family:'Montserrat';">Podcasts</h2>
-            <div class="grid" id="contenedor-cards" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:20px; padding:20px;"></div>
-        </div>
+        <h2 id="titulo-nivel" style="color:white; text-shadow: 2px 4px 10px black; font-size: 45px; text-align:center; font-family:'Montserrat';">Podcasts</h2>
+        <div id="contenedor-cards" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:30px; padding:20px; max-width:1200px; margin:auto;"></div>
     </div>
 </main>
 
 <nav class="footer-nav" id="footer-nav">
-    <div class="footer-controls">
-        <div class="dropdown" onclick="bloquearNivel()">
+    <div style="display:flex; gap:10px;">
+        <div class="dropdown">
             <button class="menu-button" style="color: var(--arg-blue)">Idioma</button>
             <div class="dropdown-content"><a onclick="seleccionarIdioma('Español')">Español</a><a onclick="seleccionarIdioma('Inglés')">Inglés</a></div>
         </div>
-        <div id="container-nivel-bot" class="dropdown locked">
+        <div class="dropdown locked btn-nivel">
             <button class="menu-button" style="color: var(--yellow-muted)">Nivel</button>
             <div class="dropdown-content">
                 <a onclick="irANivel('A1')">A1</a><a onclick="irANivel('A2')">A2</a><a onclick="irANivel('B1')">B1</a><a onclick="irANivel('B2')">B2</a><a onclick="irANivel('C1')">C1</a>
             </div>
         </div>
     </div>
-    <div class="social-footer">
+    <div>
         <a href="https://www.youtube.com/channel/UCcBSCC_f_lSLCtXSuoRTuDw" target="_blank" class="social-icon" style="margin-right:20px"><i class="fa-brands fa-youtube"></i></a>
         <a href="https://www.instagram.com/proyectopodcastok?igsh=MWI0Nmx4cWd5dmg5eA%3D%3D&utm_source=qr" target="_blank" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
     </div>
 </nav>
 
 <script>
-// SE MANTIENEN TODOS TUS TEXTOS ORIGINALES SIN RECORTAR
 let idiomaSeleccionado = "";
 let curLExt = 'es';
 const body = document.getElementById('main-body');
@@ -256,24 +248,44 @@ const extTexts = {
     },
     cuando: { 
         es: { title: "Mi Línea de Tiempo", desc: "Mi travesía lingüística comenzó formalmente en 2019, sumergiéndome en la complejidad del alemán y la fascinante estructura del chino mandarín. Con el paso de los años, mi hambre de conocimiento creció exponencialmente: en 2022 incorporé el árabe; en 2023 me cautivó la elegancia del francés; y finalmente, en 2025, he decidido abrazar la calidez del italiano y la energía del portugués. Cada año representa un nuevo mapa mental, una nueva forma de pensar y un compromiso inquebrantable con la excelencia políglota." }, 
-        en: { title: "My Timeline", desc: "My linguistic journey formally began in 2019, diving into the complexity of German and the fascinating structure of Mandarin Chinese. Over the years, my hunger for knowledge grew exponentially: in 2022 I added Arabic; in 2023 I was captivated by the elegance of French; and finally, in 2025, I decided to embrace the warmth of Italian and the energy of Portuguese. Each year represents a new mental map, a new way of thinking and an unwavering commitment to polyglot excellence." } 
+        en: { title: "My Timeline", desc: "My journey began in 2019 with German and Chinese. In 2022 I added Arabic; in 2023 French; and in 2025 Italian and Portuguese. Each year represents a new mental map and an unwavering commitment to polyglot excellence." } 
     },
     donde: { 
-        es: { title: "Entorno de Aprendizaje", desc: "Mi metodología combina la disciplina del estudio virtual con la frescura de la interacción humana constante. Aunque gran parte de mi formación es autodidacta y digital, soy un miembro sumamente activo en clubes de conversación y eventos multiculturales como 'Mundolingo'. Para mí, la ciudad entera es mi aula de clases: allí es donde pongo a prueba lo aprendido, rompo las barreras del miedo al error y, sobre todo, construyo amistades duraderas con personas de todas las latitudes del planeta. El idioma no es un fin, sino el medio para conectar con el mundo real." }, 
-        en: { title: "Learning Environment", desc: "My methodology combines the discipline of virtual study with the freshness of constant human interaction. Although much of my training is self-taught and digital, I am a very active member in conversation clubs and multicultural events like 'Mundolingo'. For me, the entire city is my classroom: that is where I test what I've learned, break the barriers of fear of making mistakes, and, above all, build lasting friendships with people from all latitudes of the planet. Language is not an end, but the means to connect with the real world." } 
+        es: { title: "Entorno de Aprendizaje", desc: "Mi metodología combina la disciplina del estudio virtual con la frescura de la interacción humana constante. Aunque gran parte de mi formación es autodidacta y digital, soy un miembro sumamente activo en clubes de conversación y eventos multiculturales como 'Mundolingo'. Para mí, la ciudad entera es mi aula de clases: allí es donde pongo a prueba lo aprendido, rompo las barreras del miedo al error y, sobre todo, construyo amistades duraderas con personas de todas las latitudes del planeta." }, 
+        en: { title: "Learning Environment", desc: "My methodology combines virtual study with human interaction. I am an active member in conversation clubs like 'Mundolingo'. For me, the entire city is my classroom: where I test what I've learned and build lasting friendships with people from all over the world." } 
     }
 };
 
-function updateExt() {
-    ['yo','porque','cuando','donde'].forEach(id => {
-        const el = document.getElementById('card-'+id);
-        if(!el) return;
-        el.querySelector('.title-text').textContent = extTexts[id][curLExt].title;
-        el.querySelector('.desc-text').textContent = extTexts[id][curLExt].desc;
-    });
-    curLExt = curLExt === 'es' ? 'en' : 'es';
+function seleccionarIdioma(idioma) {
+    idiomaSeleccionado = idioma;
+    document.querySelectorAll('.btn-nivel').forEach(el => el.classList.remove('locked'));
 }
-setInterval(updateExt, 20000); updateExt();
+
+function irANivel(nivel) {
+    if(!idiomaSeleccionado) return;
+    body.classList.add('platform-mode');
+    document.getElementById('titulo-nivel').innerText = `Podcasts ${idiomaSeleccionado} - ${nivel}`;
+    const cont = document.getElementById('contenedor-cards');
+    cont.innerHTML = "";
+    for(let i=1; i<=6; i++) {
+        cont.innerHTML += `<div style="background:white; border-radius:15px; padding:30px; border-bottom:6px solid var(--primary); text-align:center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);"><h3>Episodio ${i}</h3><p>${nivel} - ${idiomaSeleccionado}</p></div>`;
+    }
+    mostrarSeccion('episodios');
+}
+
+function mostrarSeccion(id) {
+    document.querySelectorAll('.section-container').forEach(s => s.classList.remove('active-section'));
+    document.getElementById('sec-' + id).classList.add('active-section');
+    if(id === 'sobre-mi-extendido' || id === 'episodios') body.classList.add('platform-mode');
+    else body.classList.remove('platform-mode');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function resetPagina() {
+    idiomaSeleccionado = "";
+    document.querySelectorAll('.btn-nivel').forEach(el => el.classList.add('locked'));
+    mostrarSeccion('inicio');
+}
 
 window.onscroll = function() {
     if (body.classList.contains('platform-mode')) {
@@ -285,79 +297,45 @@ window.onscroll = function() {
     });
 };
 
-function seleccionarIdioma(idioma) {
-    idiomaSeleccionado = idioma;
-    document.querySelectorAll('.locked').forEach(el => el.classList.remove('locked'));
+function updateExt() {
+    ['yo','porque','cuando','donde'].forEach(id => {
+        const el = document.getElementById('card-'+id);
+        if(!el) return;
+        el.querySelector('.title-text').textContent = extTexts[id][curLExt].title;
+        el.querySelector('.desc-text').textContent = extTexts[id][curLExt].desc;
+    });
+    curLExt = curLExt === 'es' ? 'en' : 'es';
 }
+setInterval(updateExt, 15000); updateExt();
 
-function bloquearNivel() {
-    document.getElementById('container-nivel-top').classList.add('locked');
-    document.getElementById('container-nivel-bot').classList.add('locked');
-}
-
-function irANivel(nivel) {
-    if(!idiomaSeleccionado) return;
-    body.classList.add('platform-mode');
-    document.getElementById('titulo-nivel').innerText = `Podcasts ${idiomaSeleccionado} - ${nivel}`;
-    const cont = document.getElementById('contenedor-cards');
-    cont.innerHTML = "";
-    for(let i=1; i<=6; i++) {
-        cont.innerHTML += `<div class="podcast-card" style="background:white; border-radius:15px; padding:30px; border-bottom:6px solid var(--primary); text-align:center;"><h3>Episodio ${i}</h3><p>${nivel} - ${idiomaSeleccionado}</p></div>`;
-    }
-    mostrarSeccion('episodios');
-}
-
-function mostrarSeccion(id) {
-    document.querySelectorAll('.section-container').forEach(s => s.classList.remove('active-section'));
-    document.getElementById('sec-' + id).classList.add('active-section');
-    if(id === 'sobre-mi-extendido' || id === 'episodios') { body.classList.add('platform-mode'); } 
-    else { body.classList.remove('platform-mode'); }
-    window.scrollTo({top: 0, behavior: 'smooth'});
-}
-
-function resetPagina() { mostrarSeccion('inicio'); }
-
-// BIENVENIDAS
-const welcomes = [{text:"Bienvenidos",color:"#6ec1ff"},{text:"Welcome",color:"#ff4d4d"},{text:"أهلاً بك",color:"#2ecc71"},{text:"欢迎",color:"#ff0000"},{text:"Bem-vindo",color:"#ffd700"},{text:"Benvenuti",color:"#2ecc71"}];
+const welcomes = [{text:"Bienvenidos",color:"#6ec1ff"},{text:"Welcome",color:"#ff4d4d"},{text:"أهلاً بك",color:"#2ecc71"},{text:"欢迎",color:"#ff0000"}];
 let wIdx = 0;
 setInterval(() => {
     const wEl = document.getElementById("welcome-text");
-    if(!wEl || !document.getElementById('sec-inicio').classList.contains('active-section')) return;
-    wEl.classList.add("slide-fade-out");
-    setTimeout(() => {
-        wIdx = (wIdx+1)%welcomes.length;
-        wEl.textContent = welcomes[wIdx].text;
-        wEl.style.color = welcomes[wIdx].color;
-        wEl.classList.remove("slide-fade-out");
-        wEl.classList.add("slide-fade-in");
-        setTimeout(() => { wEl.classList.remove("slide-fade-in"); }, 50);
-    }, 600);
+    if(!wEl) return;
+    wIdx = (wIdx+1)%welcomes.length;
+    wEl.textContent = welcomes[wIdx].text;
+    wEl.style.color = welcomes[wIdx].color;
 }, 3000);
-
-const rBio = { es: "Mi nombre es Ramiro, un apasionado políglota convencido de que los podcasts son el puente más natural y efectivo para conectar con una lengua nueva de forma genuina.", en: "My name is Ramiro, a passionate polyglot convinced that podcasts are the most natural and effective bridge to connect with a new language in a genuine way." };
-let bL = 'es';
-setInterval(() => {
-    const p = document.getElementById("about-desc");
-    const h2 = document.getElementById("about-title");
-    if(p && document.getElementById('sec-inicio').classList.contains('active-section')) {
-        h2.textContent = bL === 'es' ? 'Sobre mí' : 'About me';
-        p.textContent = bL === 'es' ? rBio.es : rBio.en; 
-        bL = bL === 'es' ? 'en' : 'es'; 
-    }
-}, 10000);
 
 const imgs = document.querySelectorAll('.about-img');
 let iIdx = 0;
 setInterval(() => {
-    if(document.getElementById('sec-inicio').classList.contains('active-section')) {
-        imgs[iIdx].classList.remove('active');
-        iIdx = (iIdx+1)%imgs.length;
-        imgs[iIdx].classList.add('active');
-    }
+    imgs[iIdx].classList.remove('active');
+    iIdx = (iIdx+1)%imgs.length;
+    imgs[iIdx].classList.add('active');
 }, 5000);
+
+const rBio = { es: "Mi nombre es Ramiro, un apasionado políglota convencido de que los podcasts son el puente más natural y efectivo para conectar con una lengua nueva.", en: "My name is Ramiro, a passionate polyglot convinced that podcasts are the most natural bridge to connect with a new language." };
+let bL = 'es';
+setInterval(() => {
+    const p = document.getElementById("about-desc");
+    if(p) { p.textContent = bL === 'es' ? rBio.es : rBio.en; bL = bL === 'es' ? 'en' : 'es'; }
+}, 8000);
 </script>
 </body>
 </html>
+
 
 
 
