@@ -10,8 +10,8 @@
 :root {
   --primary: #2f6fed;
   --arg-blue: #6ec1ff;
-  --yellow-muted: #d6c46a;
-  --text: #222;
+  --yellow-muted: #F4D03F;
+  --text: #2c3e50; /* Un tono más elegante que el negro puro */
   --white: #ffffff;
   --yt-color: #FF0000;
   --ig-grad: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
@@ -19,7 +19,7 @@
 
 body {
   margin: 0; font-family: 'Inter', sans-serif;
-  background: url('img/fondo.jpg.jpg') no-repeat center center fixed;
+  background: url('img/fondo.png') no-repeat center center fixed;
   background-size: cover; overflow-x: hidden;
   transition: background-image 0.8s ease-in-out;
 }
@@ -36,14 +36,30 @@ header {
 body.platform-mode .header-left { position: absolute; left: 50%; transform: translateX(-50%); }
 
 .logo-img { width: 80px; height: 80px; object-fit: contain; }
+
 .brand { display: flex; flex-direction: column; line-height: 0.8; color: white; }
 .proyecto { font-size: 26px; font-weight: 800; text-transform: uppercase; }
+
+.podcast-container { 
+  display: flex; 
+  align-items: baseline; 
+}
+
 .podcast-text { font-size: 26px; font-weight: 800; color: var(--arg-blue); text-transform: uppercase; }
+
+.punto-amarillo {
+  width: 15px; 
+  height: 15px;
+  background-color: var(--yellow-muted);
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 2px; 
+  transform: translateY(1px); 
+}
 
 .navbar { position: absolute; left: 50%; transform: translateX(-50%); display: flex; gap: 40px; transition: opacity 0.3s; }
 body.platform-mode .navbar, body.platform-mode .header-right { opacity: 0; pointer-events: none; }
 
-/* EFECTO SOMBRA EN BOTONES NAVBAR */
 .menu-button { 
   background: none; border: none; font-family: inherit; font-size: 16px; font-weight: 600; 
   color: white; cursor: pointer; padding: 10px 15px; border-radius: 8px;
@@ -56,12 +72,10 @@ body.platform-mode .navbar, body.platform-mode .header-right { opacity: 0; point
   transform: translateY(-2px);
 }
 
-/* ICONOS SOCIALES */
 .social-icon { color: white; font-size: 26px; text-decoration: none; transition: all 0.4s ease; display: inline-block; }
 .fa-youtube:hover { color: var(--yt-color); transform: scale(1.2) rotate(5deg); filter: drop-shadow(0 0 8px rgba(255,0,0,0.5)); }
 .fa-instagram:hover { background: var(--ig-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; transform: scale(1.2) rotate(-5deg); filter: drop-shadow(0 0 8px rgba(214, 36, 159, 0.5)); }
 
-/* DROPDOWNS */
 .dropdown { position: relative; display: inline-block; }
 .dropdown-content {
   display: none; position: absolute; background-color: rgba(255, 255, 255, 0.95);
@@ -77,7 +91,7 @@ header .dropdown-content { top: 100%; }
 }
 .dropdown-content a:hover { 
   background-color: #f1f1f1; color: var(--primary); 
-  padding-left: 20px; /* Un pequeño desplazamiento al marcarlo */
+  padding-left: 20px;
 }
 
 .locked .menu-button { opacity: 0.3; cursor: not-allowed; }
@@ -87,20 +101,36 @@ main { margin-top: 130px; min-height: 100vh; padding-bottom: 100px; }
 .section-container { display: none; }
 .active-section { display: block; }
 
-/* TARJETAS */
+/* TARJETAS MEJORADAS */
 .about-main, .info-card {
-  max-width: 950px; margin: 40px auto; background: rgba(255, 255, 255, 0.92); border-radius: 20px; 
-  padding: 40px; display: flex; gap: 40px; align-items: center; box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-  backdrop-filter: blur(12px);
+  max-width: 950px; margin: 40px auto; background: rgba(255, 255, 255, 0.94); border-radius: 20px; 
+  padding: 50px; display: flex; gap: 50px; align-items: center; box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  backdrop-filter: blur(15px);
 }
 .info-card { opacity: 0; transform: translateY(60px); transition: all 1s cubic-bezier(0.2, 1, 0.3, 1); }
 .info-card.reveal { opacity: 1; transform: translateY(0); }
 .info-card.reverse { flex-direction: row-reverse; }
 
-.card-img, .about-image-container { width: 300px; height: 300px; border-radius: 15px; flex-shrink: 0; }
+.card-img, .about-image-container { width: 320px; height: 320px; border-radius: 20px; flex-shrink: 0; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 .about-image-container { position: relative; }
-.about-img { width: 100%; height: 100%; border-radius: 15px; object-fit: cover; position: absolute; opacity: 0; transition: 1s; }
+.about-img { width: 100%; height: 100%; border-radius: 20px; object-fit: cover; position: absolute; opacity: 0; transition: 1.2s; }
 .about-img.active { opacity: 1; }
+
+/* TEXTO ELEGANTE */
+.card-text p, #about-desc {
+  font-size: 18px; 
+  line-height: 1.8; 
+  color: #444; 
+  font-weight: 400; 
+  letter-spacing: 0.3px;
+  text-align: justify;
+}
+.card-text h2, #about-title {
+  font-size: 34px;
+  margin-bottom: 20px;
+  color: var(--text);
+  font-weight: 800;
+}
 
 /* FOOTER */
 .footer-nav {
@@ -110,12 +140,11 @@ main { margin-top: 130px; min-height: 100vh; padding-bottom: 100px; }
 }
 .footer-visible { transform: translateY(-120px); }
 
-/* GRID EPISODIOS */
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1200px; margin: 40px auto; padding: 0 20px; }
 .podcast-card { background: white; border-radius: 15px; padding: 30px; border-bottom: 6px solid var(--primary); transition: 0.3s; text-align: center; }
 .podcast-card:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
 
-#welcome-text { font-size: 55px; font-weight: 800; text-shadow: 2px 4px 10px rgba(0,0,0,0.3); text-align: center; width: 100%; }
+#welcome-text { font-size: 60px; font-weight: 800; text-shadow: 2px 4px 10px rgba(0,0,0,0.2); text-align: center; width: 100%; margin-bottom: 20px;}
 .disintegrate { opacity: 0; filter: blur(15px); transform: scale(1.1); }
 </style>
 </head>
@@ -124,7 +153,13 @@ main { margin-top: 130px; min-height: 100vh; padding-bottom: 100px; }
 <header id="main-header">
   <div class="header-left" onclick="resetPagina()">
     <img src="img/logo.png.png" alt="Logo" class="logo-img">
-    <div class="brand"><span class="proyecto">Proyecto</span><span class="podcast-text">Podcast</span></div>
+    <div class="brand">
+      <span class="proyecto">Proyecto</span>
+      <div class="podcast-container">
+        <span class="podcast-text">Podcast</span>
+        <span class="punto-amarillo"></span>
+      </div>
+    </div>
   </div>
   <nav class="navbar">
     <div class="dropdown">
@@ -159,8 +194,8 @@ main { margin-top: 130px; min-height: 100vh; padding-bottom: 100px; }
         <div class="welcome-container" style="margin-bottom: 40px;"><div id="welcome-text">Bienvenidos</div></div>
         <section class="about-main">
             <div style="flex:1;">
-                <h2 id="about-title" class="title-link" onclick="mostrarSeccion('sobre-mi-extendido')" style="cursor:pointer; font-size: 32px; color: var(--text); transition: 0.3s;">Sobre mí</h2>
-                <p id="about-desc" style="font-size: 19px; line-height: 1.6; color: #333; min-height: 120px;">Cargando...</p>
+                <h2 id="about-title" class="title-link" onclick="mostrarSeccion('sobre-mi-extendido')" style="cursor:pointer; transition: 0.3s;">Sobre mí</h2>
+                <p id="about-desc">Cargando la esencia de este proyecto...</p>
             </div>
             <div class="about-image-container">
                 <img src="img/yo.jpg.jpg" class="about-img active"><img src="img/f.jpg.jpg" class="about-img"><img src="img/g.jpg.jpg" class="about-img">
@@ -191,10 +226,10 @@ main { margin-top: 130px; min-height: 100vh; padding-bottom: 100px; }
         <div class="about-main" style="max-width:600px; flex-direction:column;">
             <h2>Contáctame</h2>
             <form action="https://formsubmit.co/ramiro.nunez@mi.unc.edu.ar" method="POST" style="width:100%;">
-                <input type="text" name="name" placeholder="Nombre" required style="width:100%; padding:15px; margin:8px 0; border-radius:10px; border:1px solid #ddd;">
-                <input type="email" name="email" placeholder="Correo" required style="width:100%; padding:15px; margin:8px 0; border-radius:10px; border:1px solid #ddd;">
-                <textarea name="message" rows="5" placeholder="Mensaje" required style="width:100%; padding:15px; margin:8px 0; border-radius:10px; border:1px solid #ddd;"></textarea>
-                <button type="submit" style="background:var(--primary); color:white; border:none; padding:15px; border-radius:10px; cursor:pointer; font-weight:800; width:100%;">Enviar</button>
+                <input type="text" name="name" placeholder="Tu nombre" required style="width:100%; padding:15px; margin:8px 0; border-radius:10px; border:1px solid #ddd; font-family: inherit;">
+                <input type="email" name="email" placeholder="Tu correo electrónico" required style="width:100%; padding:15px; margin:8px 0; border-radius:10px; border:1px solid #ddd; font-family: inherit;">
+                <textarea name="message" rows="5" placeholder="¿En qué puedo ayudarte?" required style="width:100%; padding:15px; margin:8px 0; border-radius:10px; border:1px solid #ddd; font-family: inherit;"></textarea>
+                <button type="submit" style="background:var(--primary); color:white; border:none; padding:15px; border-radius:10px; cursor:pointer; font-weight:800; width:100%; font-size: 16px; transition: 0.3s;">Enviar Mensaje</button>
             </form>
         </div>
     </div>
@@ -227,29 +262,53 @@ main { margin-top: 130px; min-height: 100vh; padding-bottom: 100px; }
 </nav>
 
 <script>
-// (El script permanece igual para mantener toda la lógica de idiomas, scroll y secciones)
 let idiomaSeleccionado = "";
 let curLExt = 'es';
 const body = document.getElementById('main-body');
 const header = document.getElementById('main-header');
 const footer = document.getElementById('footer-nav');
 
+/* TEXTOS AMPLIADOS Y ELEGANTES */
 const extTexts = {
     yo: {
-        es: { title: "Yo soy", desc: "Mi nombre es Ramiro Nuñez, soy oriundo de la ciudad de Córdoba, Argentina, estudiante avanzado de geología y un gran entusiasta de los idiomas. Solo soy un joven en busca de conseguir un gran desarrollo personal (físico y cognitivo). Considero que el estudio de una lengua es enriquecedora en un sinfín de aspectos." },
-        en: { title: "I am", desc: "My name is Ramiro Nuñez, I am from Córdoba, Argentina, a senior Geology student and a great language enthusiast. I am just a young person pursuing significant personal development (physical and cognitive). I believe language study is enriching in countless ways." }
+        es: { 
+          title: "Mi Identidad", 
+          desc: "Mi nombre es Ramiro Nuñez, orgullosamente oriundo de Córdoba, Argentina. Actualmente, soy un estudiante avanzado de la carrera de Geología y, en paralelo, un apasionado incansable por el estudio de los idiomas. Me defino como un joven en constante movimiento, siempre enfocado en alcanzar un equilibrio integral entre el desarrollo cognitivo y el bienestar físico. Creo firmemente que aprender una lengua nueva es abrir una puerta a una cosmovisión distinta, enriqueciendo el espíritu y expandiendo los límites de nuestra propia realidad." 
+        },
+        en: { 
+          title: "My Identity", 
+          desc: "My name is Ramiro Nuñez, proudly from Córdoba, Argentina. I am currently a senior Geology student and, in parallel, a restless language enthusiast. I define myself as a young person in constant motion, always focused on achieving an integral balance between cognitive development and physical well-being. I firmly believe that learning a new language means opening a door to a different worldview, enriching the spirit and expanding the limits of our own reality." 
+        }
     },
     porque: {
-        es: { title: "¿Cómo y Por qué?", desc: "Desde el año 2019 se instauro en mi cabeza el objetivo de hablar 10 idiomas antes de mis 30 años. Considero los podcast como uno de los mejores métodos para dicho cometido, para que personas interesadas en aprender puedan progresar con estos monólogos." },
-        en: { title: "How and Why?", desc: "Since 2019, I've had the goal of speaking 10 languages before I'm 30. I find podcasts to be one of the best methods for this purpose, helping interested people progress through these monologues." }
+        es: { 
+          title: "Propósito y Visión", 
+          desc: "¿Cómo nace todo esto? En 2019, me propuse un desafío personal ambicioso: dominar 10 idiomas antes de cumplir los 30 años. En este viaje, descubrí que los podcasts son una de las herramientas más potentes y naturales para la adquisición de una lengua. Este espacio surge para que personas con esa misma chispa de curiosidad puedan progresar a través de monólogos auténticos, diseñados para mejorar la escucha y la comprensión de una manera fluida y genuina." 
+        },
+        en: { 
+          title: "Purpose and Vision", 
+          desc: "How did it all start? In 2019, I set an ambitious personal challenge: to master 10 languages before turning 30. During this journey, I discovered that podcasts are one of the most powerful and natural tools for language acquisition. This space was created so that people with that same spark of curiosity can progress through authentic monologues, designed to improve listening and comprehension in a fluid and genuine way." 
+        }
     },
     cuando: {
-        es: { title: "¿Cuándo?", desc: "Comencé en 2019 con el alemán y chino. En 2022 sumé el árabe, 2023 el francés, y en 2025 Italiano y Portugués." },
-        en: { title: "When?", desc: "Started in 2019 with German and Chinese. Added Arabic in 2022, French in 2023, and Italian and Portuguese in 2025." }
+        es: { 
+          title: "Mi Línea de Tiempo", 
+          desc: "Mi travesía lingüística comenzó formalmente en 2019, sumergiéndome en la complejidad del alemán y la fascinante estructura del chino mandarín. Con el paso de los años, mi hambre de conocimiento creció: en 2022 incorporé el árabe; en 2023 me cautivó la elegancia del francés; y finalmente, en 2025, he decidido abrazar la calidez del italiano y la energía del portugués, continuando así con mi meta de ser un ciudadano del mundo." 
+        },
+        en: { 
+          title: "My Timeline", 
+          desc: "My linguistic journey formally began in 2019, diving into the complexity of German and the fascinating structure of Mandarin Chinese. Over the years, my hunger for knowledge grew: in 2022 I added Arabic; in 2023 I was captivated by the elegance of French; and finally, in 2025, I decided to embrace the warmth of Italian and the energy of Portuguese, thus continuing my goal of being a citizen of the world." 
+        }
     },
     donde: {
-        es: { title: "¿Donde?", desc: "Estudio mayoritariamente de manera virtual y participo en clubes conversacionales y eventos como 'Mundolingo' en mi ciudad para practicar y hacer amigos." },
-        en: { title: "Where?", desc: "I mostly study virtually and participate in conversation clubs and events like 'Mundolingo' in my city to practice and make friends." }
+        es: { 
+          title: "Entorno de Aprendizaje", 
+          desc: "Mi metodología combina la disciplina del estudio virtual con la frescura de la interacción humana. Aunque gran parte de mi formación es autodidacta y digital, soy un miembro activo en clubes de conversación y eventos multiculturales como 'Mundolingo'. Considero que la ciudad es mi aula: allí es donde pongo a prueba lo aprendido, rompo las barreras del miedo al error y, sobre todo, construyo amistades duraderas con personas de todas las latitudes." 
+        },
+        en: { 
+          title: "Learning Environment", 
+          desc: "My methodology combines the discipline of virtual study with the freshness of human interaction. Although much of my training is self-taught and digital, I am an active member in conversation clubs and multicultural events like 'Mundolingo'. I consider the city my classroom: that is where I test what I've learned, break the barriers of fear of making mistakes, and, above all, build lasting friendships with people from all over the world." 
+        }
     }
 };
 
@@ -292,7 +351,7 @@ function bloquearNivel() {
 function irANivel(nivel) {
     if(!idiomaSeleccionado) return;
     body.classList.add('platform-mode');
-    body.style.backgroundImage = "url('img/niveles.jpg.jpg')";
+    body.style.backgroundImage = "url('img/fondo.png')";
     document.getElementById('titulo-nivel').innerText = `Podcasts ${idiomaSeleccionado} - ${nivel}`;
     const cont = document.getElementById('contenedor-cards');
     cont.innerHTML = "";
@@ -307,7 +366,6 @@ function irANivel(nivel) {
 function mostrarSeccion(id) {
     document.querySelectorAll('.section-container').forEach(s => s.classList.remove('active-section'));
     document.getElementById('sec-' + id).classList.add('active-section');
-    
     if(id === 'sobre-mi-extendido' || id === 'episodios') {
         body.classList.add('platform-mode');
     } else {
@@ -335,7 +393,10 @@ setInterval(() => {
     }, 800);
 }, 2000);
 
-const rBio = { es: "Mi nombre es Ramiro, soy un joven políglota quien sabe lo importante que es encontrar un buen podcast para aprender de forma genuina.", en: "My name is Ramiro, I am a young polyglot who knows how important it is to find a good podcast to learn in a genuine way." };
+const rBio = { 
+  es: "Mi nombre es Ramiro, un apasionado políglota convencido de que los podcasts son el puente más natural y efectivo para conectar con una lengua nueva de forma genuina.", 
+  en: "My name is Ramiro, a passionate polyglot convinced that podcasts are the most natural and effective bridge to connect with a new language in a genuine way." 
+};
 let bL = 'es';
 setInterval(() => {
     const p = document.getElementById("about-desc");
@@ -362,5 +423,6 @@ setInterval(() => {
 </script>
 </body>
 </html>
+
 
 
