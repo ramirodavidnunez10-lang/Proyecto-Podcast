@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Proyecto Podcast - Ramiro</title>
+<title>Polyglot Project - Ramiro</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
@@ -15,6 +15,7 @@
   --text: #2c3e50;
   --white: #ffffff;
   --yt-color: #FF0000;
+  --tiktok-color: #00f2ea; /* Color cian característico de TikTok */
   --ig-grad: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
 }
 
@@ -54,15 +55,14 @@ body.platform-mode .navbar, body.platform-mode .header-right { opacity: 0; point
 .dropdown { position: relative; display: inline-block; }
 .dropdown-content {
   display: none; position: absolute; background: white;
-  min-width: 160px; box-shadow: 0px 8px 16px rgba(0,0,0,0.3); 
+  min-width: 180px; box-shadow: 0px 8px 16px rgba(0,0,0,0.3); 
   border-radius: 8px; z-index: 3000; left: 50%; transform: translateX(-50%); top: 100%;
 }
 .dropdown:not(.locked):hover .dropdown-content { display: block; }
 
-/* FOOTER DESPLIEGUE ARRIBA */
 .footer-nav .dropdown-content { top: auto; bottom: 100%; margin-bottom: 15px; }
 
-.dropdown-content a { color: #333; padding: 12px 16px; text-decoration: none; display: block; font-size: 14px; cursor: pointer; }
+.dropdown-content a { color: #333; padding: 12px 16px; text-decoration: none; display: block; font-size: 14px; cursor: pointer; font-weight: 600;}
 .dropdown-content a:hover { background-color: #f1f1f1; color: var(--primary); }
 
 .locked { opacity: 0.3; cursor: not-allowed; }
@@ -76,8 +76,6 @@ body.platform-mode .navbar, body.platform-mode .header-right { opacity: 0; point
     .proyecto, .podcast-text { font-size: 18px; }
     main { margin-top: 160px; }
     .about-main, .info-card, .info-card.reverse { flex-direction: column; padding: 30px; margin: 20px; text-align: center; }
-    .card-img, .about-image-container { width: 100%; max-width: 280px; height: 280px; }
-    #welcome-text { font-size: 45px !important; }
 }
 
 /* CONTENIDO */
@@ -90,6 +88,7 @@ main { margin-top: 130px; min-height: 100vh; padding-bottom: 120px; }
   padding: 50px; display: flex; gap: 50px; align-items: center; box-shadow: 0 20px 40px rgba(0,0,0,0.15);
   backdrop-filter: blur(15px);
 }
+
 .info-card { opacity: 0; transform: translateY(60px); transition: 1s cubic-bezier(0.2, 1, 0.3, 1); }
 .info-card.reveal { opacity: 1; transform: translateY(0); }
 .info-card.reverse { flex-direction: row-reverse; }
@@ -104,6 +103,7 @@ main { margin-top: 130px; min-height: 100vh; padding-bottom: 120px; }
 /* REDES SOCIALES HOVER EFECTOS */
 .social-icon { color: white; font-size: 26px; text-decoration: none; transition: 0.4s; display: inline-block; }
 .fa-youtube:hover { color: var(--yt-color); transform: scale(1.2) rotate(5deg); }
+.fa-tiktok:hover { color: var(--tiktok-color); transform: scale(1.2) rotate(5deg); }
 .fa-instagram:hover { background: var(--ig-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; transform: scale(1.2) rotate(-5deg); }
 
 /* FOOTER */
@@ -121,9 +121,9 @@ main { margin-top: 130px; min-height: 100vh; padding-bottom: 120px; }
   <div class="header-left" onclick="resetPagina()">
     <img src="img/logo.png.png" alt="Logo" class="logo-img">
     <div class="brand">
-      <span class="proyecto">Proyecto</span>
+      <span class="proyecto">Polyglot</span>
       <div class="podcast-container">
-        <span class="podcast-text">Podcast</span>
+        <span class="podcast-text">Project</span>
         <span class="punto-amarillo"></span>
       </div>
     </div>
@@ -139,7 +139,9 @@ main { margin-top: 130px; min-height: 100vh; padding-bottom: 120px; }
     <div class="dropdown locked btn-nivel">
       <button class="menu-button" style="color: var(--yellow-muted)">Nivel</button>
       <div class="dropdown-content">
-        <a onclick="irANivel('A1')">A1</a><a onclick="irANivel('A2')">A2</a><a onclick="irANivel('B1')">B1</a><a onclick="irANivel('B2')">B2</a><a onclick="irANivel('C1')">C1</a>
+        <a onclick="irANivel('A1')">Iniciante (A1-A2)</a>
+        <a onclick="irANivel('B1')">Intermedio (B1-B2)</a>
+        <a onclick="irANivel('C1')">Avanzado (C1-C2)</a>
       </div>
     </div>
     <div class="dropdown">
@@ -152,6 +154,7 @@ main { margin-top: 130px; min-height: 100vh; padding-bottom: 120px; }
   </nav>
   <div class="header-right">
     <a href="https://www.youtube.com/channel/UCcBSCC_f_lSLCtXSuoRTuDw" target="_blank" class="social-icon" style="margin-right:20px"><i class="fa-brands fa-youtube"></i></a>
+    <a href="https://www.tiktok.com/@polyglotproyect?_r=1&_t=ZM-92uAztlGwUG" target="_blank" class="social-icon" style="margin-right:20px"><i class="fa-brands fa-tiktok"></i></a>
     <a href="https://www.instagram.com/proyectopodcastok?igsh=MWI0Nmx4cWd5dmg5eA%3D%3D&utm_source=qr" target="_blank" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
   </div>
 </header>
@@ -220,17 +223,21 @@ main { margin-top: 130px; min-height: 100vh; padding-bottom: 120px; }
         <div class="dropdown locked btn-nivel">
             <button class="menu-button" style="color: var(--yellow-muted)">Nivel</button>
             <div class="dropdown-content">
-                <a onclick="irANivel('A1')">A1</a><a onclick="irANivel('A2')">A2</a><a onclick="irANivel('B1')">B1</a><a onclick="irANivel('B2')">B2</a><a onclick="irANivel('C1')">C1</a>
+                <a onclick="irANivel('A1')">Iniciante (A1-A2)</a>
+                <a onclick="irANivel('B1')">Intermedio (B1-B2)</a>
+                <a onclick="irANivel('C1')">Avanzado (C1-C2)</a>
             </div>
         </div>
     </div>
     <div>
         <a href="https://www.youtube.com/channel/UCcBSCC_f_lSLCtXSuoRTuDw" target="_blank" class="social-icon" style="margin-right:20px"><i class="fa-brands fa-youtube"></i></a>
+        <a href="https://www.tiktok.com/@polyglotproyect?_r=1&_t=ZM-92uAztlGwUG" target="_blank" class="social-icon" style="margin-right:20px"><i class="fa-brands fa-tiktok"></i></a>
         <a href="https://www.instagram.com/proyectopodcastok?igsh=MWI0Nmx4cWd5dmg5eA%3D%3D&utm_source=qr" target="_blank" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
     </div>
 </nav>
 
 <script>
+/* Mismo Script anterior */
 let idiomaSeleccionado = "";
 let curLExt = 'es';
 const body = document.getElementById('main-body');
@@ -264,11 +271,17 @@ function seleccionarIdioma(idioma) {
 function irANivel(nivel) {
     if(!idiomaSeleccionado) return;
     body.classList.add('platform-mode');
-    document.getElementById('titulo-nivel').innerText = `Podcasts ${idiomaSeleccionado} - ${nivel}`;
+    
+    let nombreNivel = "";
+    if(nivel === 'A1') nombreNivel = "Iniciante (A1-A2)";
+    else if(nivel === 'B1') nombreNivel = "Intermedio (B1-B2)";
+    else if(nivel === 'C1') nombreNivel = "Avanzado (C1-C2)";
+
+    document.getElementById('titulo-nivel').innerText = `Podcasts ${idiomaSeleccionado} - ${nombreNivel}`;
     const cont = document.getElementById('contenedor-cards');
     cont.innerHTML = "";
     for(let i=1; i<=6; i++) {
-        cont.innerHTML += `<div style="background:white; border-radius:15px; padding:30px; border-bottom:6px solid var(--primary); text-align:center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);"><h3>Episodio ${i}</h3><p>${nivel} - ${idiomaSeleccionado}</p></div>`;
+        cont.innerHTML += `<div style="background:white; border-radius:15px; padding:30px; border-bottom:6px solid var(--primary); text-align:center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);"><h3>Episodio ${i}</h3><p>${nombreNivel} - ${idiomaSeleccionado}</p></div>`;
     }
     mostrarSeccion('episodios');
 }
@@ -335,7 +348,6 @@ setInterval(() => {
 </script>
 </body>
 </html>
-
 
 
 
